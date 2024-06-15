@@ -47,8 +47,6 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 - Pipeline completo:
 
    ![Modelagem](imagens/Pipeline_DM.jpg)
-   <img src="imagens/Pipeline_DM_bkp.png" width="950"/>
-
 
 ### Arquitetura Técnica
 
