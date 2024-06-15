@@ -11,7 +11,9 @@
 
 ## 1. Objetivo do Case
 
-O objetivo deste case é realizar a ingestão, tratamento e visualização dos dados do arquivo CAPAG, que contém informações sobre a classificação de capacidade de pagamento dos municípios brasileiros. 
+O objetivo deste case é realizar a ingestão, tratamento e visualização dos dados do arquivo **CAPAG**, que contém informações sobre a classificação de capacidade de pagamento dos municípios brasileiros. 
+
+O processo CAPAG (Capacidade de Pagamento) no Brasil é um sistema de avaliação desenvolvido pela Secretaria do Tesouro Nacional (STN) para analisar a situação fiscal dos estados e municípios. Esse processo é essencial para determinar a capacidade das cidades de honrar suas dívidas e obter garantias da União para novos empréstimos.
 
 O projeto busca transformar esses dados brutos em informações valiosas, através de processos de ETL (Extract, Transform, Load) e exibição em dashboards interativos.
 
@@ -309,8 +311,8 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 
 ### Considerações Finais
 
-O case apresentado foi possível entender como funciona o processo de p
+O case apresentado foi possível entender como funciona o processo do CAPAG, essencial para avaliar a saúde fiscal dos estados e municípios, promovendo a responsabilidade fiscal e ajudando a manter a estabilidade econômica do país.
 
-Este projeto demonstrou a capacidade de transformar dados brutos em informações valiosas através de um pipeline de ETL bem definido e ferramentas de Engenharia de Dados poderosas. 
+Referente ao lado técnico, este projeto demonstrou a capacidade de transformar dados brutos em informações valiosas através de um pipeline de ETL bem definido e ferramentas de Engenharia de Dados poderosas. 
 
 A utilização de tecnologias como BigQuery, dbt, SODA e Metabase permitiu a criação de um sistema robusto e escalável para análise de dados. As melhorias propostas visam aumentar a eficiência e a profundidade das análises, proporcionando um maior valor aos usuários finais.
