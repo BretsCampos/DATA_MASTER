@@ -1,5 +1,14 @@
 # Projeto Data Master - CAPAG
 
+## Sumário
+
+1. [Objetivo do Case](#1-objetivo-do-case)
+2. [Arquitetura de Solução e Arquitetura Técnica](#2-arquitetura-de-solução-e-arquitetura-técnica)
+3. [Explicação sobre o Case Desenvolvido](#3-explicação-sobre-o-case-desenvolvido)
+4. [Reprodução do Case](#4-reprodução-do-case)
+5. [Melhorias e Considerações Finais](#5-melhorias-e-considerações-finais)
+
+
 ## 1. Objetivo do Case
 
 O objetivo deste case é realizar a ingestão, tratamento e visualização dos dados do arquivo CAPAG, que contém informações sobre a classificação de capacidade de pagamento dos municípios brasileiros. 
@@ -280,8 +289,8 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
      ![Modelagem](imagens/metabase_ind1_eixos2.png)
 
    - Para a construção dos outros dois gráficos **TOP 10 Cidades x Indicador_2** e **TOP 10 Cidades x Indicador_3**, o processo é semelhante ao do gráfico acima, referente ao Indicador_1, mudando apenas o tipo da escala (para melhor visualização dos dados), no item Eixos:
-       - `TOP 10 Cidades x Indicador_2` - Eixos > Escala > **Linear**
-       - `TOP 10 Cidades x Indicador_3` - Eixos > Escala > **Logarítmico**
+       - `TOP 10 Cidades x Indicador_2`: Eixos > Escala > **Linear**
+       - `TOP 10 Cidades x Indicador_3`: Eixos > Escala > **Logarítmico**
 
 
 ## 5. Melhorias e Considerações Finais
@@ -289,10 +298,10 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 ### Melhorias
 
 1. **Automação do Pipeline de Dados**:
-   - Implementar uma pipeline automatizada utilizando o Airflow para gerenciar a ingestão, transformação e validação dos dados.
+   - A divulgação do arquivo de insumo CAPAG.txt é quadrimestral. Portanto, uma melhoria sugerida seria implementar a atualização automática desse arquivo e a execução programada do pipeline no Airflow. No case apresentado, esses pontos foram realizados de forma manual.
 
 2. **Monitoramento Contínuo**:
-   - Utilizar o SODA para configurar alertas e monitoramento contínuo da qualidade dos dados.
+   - Utilizar o SODA para configurar alertas e monitoramento contínuo da qualidade dos dados, percorrendo todas as etapas do desenvolvimento, e não apenas após a transformação dos dados, garantindo maior precisão e integridade.
 
 3. **Expansão das Visualizações**:
    - Adicionar mais tipos de visualizações no Metabase para obter insights mais profundos.
@@ -300,4 +309,6 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 
 ### Considerações Finais
 
-Este projeto demonstrou a capacidade de transformar dados brutos em informações valiosas através de um pipeline de ETL bem definido e ferramentas de BI poderosas. A utilização de tecnologias como BigQuery, dbt, SODA e Metabase permitiu a criação de um sistema robusto e escalável para análise de dados. As melhorias propostas visam aumentar a eficiência e a profundidade das análises, proporcionando um maior valor aos usuários finais.
+Este projeto demonstrou a capacidade de transformar dados brutos em informações valiosas através de um pipeline de ETL bem definido e ferramentas de Engenharia de Dados poderosas. 
+
+A utilização de tecnologias como BigQuery, dbt, SODA e Metabase permitiu a criação de um sistema robusto e escalável para análise de dados. As melhorias propostas visam aumentar a eficiência e a profundidade das análises, proporcionando um maior valor aos usuários finais.
