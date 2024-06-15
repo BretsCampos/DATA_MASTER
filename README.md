@@ -47,6 +47,7 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 - Pipeline completo:
 
    ![Modelagem](imagens/Pipeline_DM.jpg)
+   <img src="imagens/Pipeline_DM_bkp.png" width="950"/>
 
 
 ### Arquitetura Técnica
@@ -103,11 +104,16 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 5. **Validação dos Dados com SODA**:
    - Foi configurado o SODA para verificar a qualidade dos dados transformados no BigQuery.
    - Foram realizadas validações como:
-     - Validação de **formatos de dados**.
-     - Verificação de **valores nulos**.
-     - Verificação de **valores extremos**.
-     - Validação de **dados únicos**.
+     - **Formatos de dados**.
+     - **Valores nulos**.
+     - **Valores extremos**.
+     - **Dados únicos**.
    - Essa verificação da qualidade dos dados foi realizada através da dag _check_transform_, que diferente das outras dags, ela é uma tarefa do Airflow que é executada em um ambiente Python externo (_@task.external_python_), garantindo isolamento de dependências e evitando conflito com as outras tarefas.
+   - A plataforma SODA emite alerta quando uma das análises verifica que o arquivo está com erro, e também ocorre o erro na pipeline do Airflow.
+   - Essa é o painel de validações que o SODA nos apresenta:
+
+      ![Modelagem](imagens/soda_validacoes.png)
+
 
 6. **Criação de Tabelas report no BigQuery com dbt**:
    - Após a validação da qualidade dos dados das tabelas fato e dimensão, ocorre a chamada da dag _report_, que é responsável pela criação das seguintes tabelas, com o uso do dbt:
@@ -131,7 +137,6 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 
       ![Modelagem](imagens/dash.png)
 
-
 ## 4. Reprodução do Case
 
 ### Pré-requisitos:
@@ -146,9 +151,9 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 - Antes de tudo, deve-se abrir o Docker Desktop, para iniciar o Docker Engine.
 - Após isso, ao importar o projeto para um editor de código (VS Code, por exemplo), deve-se realizar o seguinte comando no terminal:
 
-      ```
-      astro dev start
-      ```
+   ```
+   astro dev start
+   ```
       
 - Este comando realiza o seguinte:
    - Inicia os containers Docker necessários para rodar o Airflow localmente.
@@ -217,8 +222,8 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
    - Após realizar o login no SODA (https://www.soda.io/), deve-se pegar a chave de acesso para se conectar ao Airflow.
    - Clique no usuário no canto superior direito e depois em Profile. Na aba API Keys, adicione uma nova Key:
 
-      <img src="imagens/soda_key.png" width="600"/>
-      <img src="imagens/soda_key2.png" width="600"/>
+      <img src="imagens/soda_key.png" width="800"/>
+      <img src="imagens/soda_key2.png" width="800"/>
 
    - Essa chave gerada deve substituir as linhas de código do seguinte arquivo:
       -  _include/soda/configuration.yml_ - linhas 12, 13, 14 e 15
@@ -230,12 +235,12 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
    - Deve-se incluir o novo arquivo **service_account.json** nas configurações do Airflow, para ser possível a ligação com o BigQuery. Para isso abra o navegador de sua preferencia e conecte no endereço http://localhost:8080/. Em seguida clique em Admin > Connections.
  
 
-      <img src="imagens/airflow_admin.png" width="500"/>
+      <img src="imagens/airflow_admin.png" width="700"/>
 
 
    - Com isso, crie a seguinte configuração, teste e salve:
 
-      <img src="imagens/airflow_conexao.png" width="550"/>
+      <img src="imagens/airflow_conexao.png" width="750"/>
 
 
    - Após a criação da conexão com o BigQuery, é possível realizar a execução completa do projeto pelo Airflow.
@@ -274,7 +279,7 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
    - Para a construção do gráfico **TOP 10 Cidades x Indicador_1**, vá até a página inicial do Metabase e reinicie o processo, escolhendo o item DW > Capag > "Report Ind1 Cidades Ano". As configurações para esse gráfico devem ficar assim:
 
      ![Modelagem](imagens/metabase_ind1.png)
-     ![Modelagem](imagens/metabase_ind1_eixos.png)
+     ![Modelagem](imagens/metabase_ind1_eixos2.png)
 
    - Para a construção dos outros dois gráficos **TOP 10 Cidades x Indicador_2** e **TOP 10 Cidades x Indicador_3**, o processo é semelhante ao do gráfico acima, referente ao Indicador_1, mudando apenas o tipo da escala (para melhor visualização dos dados), no item Eixos:
        - `TOP 10 Cidades x Indicador_2` - Eixos > Escala > **Linear**
