@@ -63,7 +63,7 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 - **Astro CLI**: Ferramenta de linha de comando para gerenciamento do Airflow.
 - **Airflow**: Plataforma para criar, agendar e monitorar workflows, utilizada para orquestração do pipeline de dados.
 - **Google Cloud Platform**: Utilizado para armazenamento e processamento dos dados.
-  - **Google Cloud Storage**: Armazenamento do arquivo CAPAG e cidades.
+  - **Google Cloud Storage**: Armazenamento do arquivo CAPAG.csv e cidades.csv.
   - **BigQuery**: Data warehouse utilizado para armazenar e processar os dados.
 - **dbt (Data Build Tool)**: Ferramenta para transformação dos dados, escrita de modelos SQL e criação de tabelas no BigQuery.
 - **SODA**: Ferramenta para validação e monitoramento da qualidade dos dados.
@@ -92,7 +92,7 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
    
    - Após esse procedimento, para receber os insumos no BigQuery, foi realizada a criação de datasets vazios (capag e cidades), através das dags _create_capag_dataset_ e _create_cidades_dataset_. 
    
-   - Com isso, esses arquivos no GC Storage, foram importados no BigQuery, através das dags _gcs_to_raw_capag_ e _gcs_to_raw_cidades_, e as tabelas **capag_brasil** e **cidades_brasil** foram criadas.
+   - Com isso, esses arquivos no GC Storage foram importados no BigQuery, através das dags _gcs_to_raw_capag_ e _gcs_to_raw_cidades_, e as tabelas **capag_brasil** e **cidades_brasil** foram criadas.
 
 4. **Criação de Tabelas transform no BigQuery com dbt**:
    - Com a criação das tabelas _capag_brasil_ e _cidades_brasil_, foi utilizado o dbt para criar modelos SQL que transformam os dados brutos em tabelas fato e dimensão.
@@ -110,13 +110,13 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 
 5. **Validação dos Dados com SODA**:
    - Foi configurado o SODA para verificar a qualidade dos dados transformados no BigQuery.
-   - Foram realizadas validações como:
+   - Validações como:
      - **Formatos de dados**.
      - **Valores nulos**.
      - **Valores extremos**.
      - **Dados únicos**.
    - Essa verificação da qualidade dos dados foi realizada através da dag _check_transform_, que diferente das outras dags, ela é uma tarefa do Airflow que é executada em um ambiente Python externo (_@task.external_python_), garantindo isolamento de dependências e evitando conflito com as outras tarefas.
-   - A plataforma SODA emite alerta quando uma das análises verifica que o arquivo está com erro, e também ocorre o erro na pipeline do Airflow.
+   - A plataforma SODA emite alertas quando detecta erros nas análises de dados, garantindo que qualquer problema seja rapidamente identificado. Caso um erro seja encontrado, o pipeline do Airflow também reflete essa falha, interrompendo o processo até que o problema seja resolvido.
    - Essa é o painel de validações que o SODA nos apresenta:
 
       ![Modelagem](imagens/soda_validacoes.png)
@@ -138,7 +138,7 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
       - `TOP 10 Cidades x Indicador_1`: Gráfico de barra que demonstra as 10 cidades com os maiores percentuais de **endividamento**, trazendo também de forma interativa o estado (unidade federativa) que se encontram e o ano base da ocorrência desse indicador.
      - `TOP 10 Cidades x Indicador_2`: Gráfico de barra que demonstra as 10 cidades com os maiores percentuais de **poupança corrente**, trazendo também de forma interativa o estado (unidade federativa) que se encontram e o ano base da ocorrência desse indicador.
      - `TOP 10 Cidades x Indicador_3`: Gráfico de barra que demonstra as 10 cidades com os maiores percentuais de **liquidez**, trazendo também de forma interativa o estado (unidade federativa) que se encontram e o ano base da ocorrência desse indicador.
-     - `TOP 10 Estados Nota A`: Gráfico de pizza que mostra os 10 estados brasileiros com o maior número de cidades com **classificação capag como A**.
+     - `TOP 10 Estados Nota A`: Gráfico de pizza que mostra os 10 estados brasileiros com o maior número de cidades com **classificação capag como A** (melhor classificação).
 
    - Dashboard completo:
 
@@ -155,8 +155,8 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 
 
 ### Inicialização do ambiente:
-- Antes de tudo, deve-se abrir o Docker Desktop, para iniciar o Docker Engine.
-- Após isso, ao importar o projeto para um editor de código (VS Code, por exemplo), deve-se realizar o seguinte comando no terminal:
+- Primeiramente deve-se abrir o Docker Desktop, para iniciar o Docker Engine.
+- Com o Astro CLI previamente instalado, ao importar o projeto para um editor de código (VS Code, por exemplo), deve-se realizar o seguinte comando no terminal:
 
    ```
    astro dev start
@@ -239,7 +239,7 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 
 ### Execução do Airflow
 
-   - Deve-se incluir o novo arquivo **service_account.json** nas configurações do Airflow, para ser possível a ligação com o BigQuery. Para isso abra o navegador de sua preferencia e conecte no endereço http://localhost:8080/. Em seguida clique em Admin > Connections.
+   - Deve-se incluir o novo arquivo **service_account.json** (aba _include/gcp_) nas configurações do Airflow, para ser possível a ligação com o BigQuery. Para isso abra o navegador de sua preferencia e conecte no endereço http://localhost:8080/. Em seguida clique em Admin > Connections.
  
 
       <img src="imagens/airflow_admin.png" width="700"/>
@@ -266,11 +266,11 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 
 ### Construção do Dashboard no Metabase
 
-   - Como todo projeto executado com sucesso no Airflow, agora é possível criar gráficos no Metabase. 
+   - Com todo projeto executado com sucesso no Airflow, agora é possível criar gráficos no Metabase. 
 
    - Primeiramente abra o navegador de sua preferencia e conecte no endereço http://localhost:3000/. Em seguida faça um cadastro no Metabase.
-   - Os gráficos apresentados no item 3.6 deste arquivo Readme foram criados após a primeira execução das dags no Airflow. Com isso, deve-se criar os mesmos gráficos para uma reprodução do case em outra máquina.
-   - Após o cadastro no Metabase, é possível iniciar a criação dos gráficos. Vá para a tela principal do Metabase e clique em Novo > Pergunta:
+   - Os gráficos apresentados acima, no **item 3.6** deste arquivo, foram criados após a primeira execução das dags no Airflow. Com isso, deve-se criar os mesmos gráficos para uma reprodução do case em outra máquina.
+   - Após o cadastro no Metabase, é possível iniciar a criação dos gráficos. Vá para a tela principal e clique em Novo > Pergunta:
 
      ![Modelagem](imagens/metabase_home.png)
 
@@ -288,7 +288,7 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
      ![Modelagem](imagens/metabase_ind1.png)
      ![Modelagem](imagens/metabase_ind1_eixos2.png)
 
-   - Para a construção dos outros dois gráficos **TOP 10 Cidades x Indicador_2** e **TOP 10 Cidades x Indicador_3**, o processo é semelhante ao do gráfico acima, referente ao Indicador_1, mudando apenas o tipo da escala (para melhor visualização dos dados), no item Eixos:
+   - Para a construção dos outros dois gráficos **TOP 10 Cidades x Indicador_2** e **TOP 10 Cidades x Indicador_3**, o processo é semelhante ao do gráfico acima, referente ao Indicador_1, mudando apenas o tipo da escala (para melhor visualização dos dados) no item Eixos:
        - `TOP 10 Cidades x Indicador_2`: Eixos > Escala > **Linear**
        - `TOP 10 Cidades x Indicador_3`: Eixos > Escala > **Logarítmico**
 
@@ -308,6 +308,8 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
    - Incluir filtros dinâmicos para permitir uma análise mais detalhada dos dados.
 
 ### Considerações Finais
+
+O case apresentado foi possível entender como funciona o processo de p
 
 Este projeto demonstrou a capacidade de transformar dados brutos em informações valiosas através de um pipeline de ETL bem definido e ferramentas de Engenharia de Dados poderosas. 
 
