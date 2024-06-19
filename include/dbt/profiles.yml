@@ -8,5 +8,5 @@ capag:
     project: projeto-data-master
     dataset: capag
     threads: 1
-    timeout_seconds: 300
+    timeout_seconds: 800
     location: US
