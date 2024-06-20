@@ -241,7 +241,7 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 
 ### Execução do Airflow
 
-   - Deve-se incluir o novo arquivo **service_account.json** (aba _include/gcp_) nas configurações do Airflow, para ser possível a ligação com o BigQuery. Para isso abra o navegador de sua preferencia e conecte no endereço http://localhost:8080/. Em seguida clique em Admin > Connections.
+   - Deve-se incluir o novo arquivo **service_account.json** (aba _include/gcp_) nas configurações do Airflow, para ser possível a ligação com o BigQuery. Para isso abra o navegador de sua preferência e conecte no endereço http://localhost:8080/. Em seguida clique em Admin > Connections.
  
 
       <img src="imagens/airflow_admin.png" width="700"/>
@@ -270,7 +270,7 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 
    - Com todo projeto executado com sucesso no Airflow, agora é possível criar gráficos no Metabase. 
 
-   - Primeiramente abra o navegador de sua preferencia e conecte no endereço http://localhost:3000/. Em seguida faça um cadastro no Metabase.
+   - Primeiramente abra o navegador de sua preferência e conecte no endereço http://localhost:3000/. Em seguida faça um cadastro no Metabase.
    - Os gráficos apresentados acima, no **item 3.6** deste arquivo, foram criados após a primeira execução das dags no Airflow. Com isso, deve-se criar os mesmos gráficos para uma reprodução do case em outra máquina.
    - Após o cadastro no Metabase, é possível iniciar a criação dos gráficos. Vá para a tela principal e clique em Novo > Pergunta:
 
