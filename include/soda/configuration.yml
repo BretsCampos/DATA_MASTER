@@ -6,10 +6,10 @@ data_source capag:
     - https://www.googleapis.com/auth/bigquery
     - https://www.googleapis.com/auth/cloud-platform
     - https://www.googleapis.com/auth/drive
-    project_id: 'projeto-data-master'
+    project_id: '#### COLOQUE AQUI O PROJECT ID GERADO PELO GCP ####'
     dataset: capag
 
 soda_cloud:
-  host: cloud.us.soda.io
-  api_key_id: cf27cc6b-d323-4de9-a7cf-0b34546ac736
-  api_key_secret: 7ubYI6g1MyEGO_my5rW1a7KYdHZ59hPBEJ9ljHCS37LMLYEJ9JzpPQ
+  host: #### COLOQUE AQUI A INFORMACAO GERADA PELA API KEY DO SODA ####
+  api_key_id: #### COLOQUE AQUI A INFORMACAO GERADA PELA API KEY DO SODA ####
+  api_key_secret: #### COLOQUE AQUI A INFORMACAO GERADA PELA API KEY DO SODA ####
