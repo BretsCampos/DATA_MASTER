@@ -61,7 +61,7 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 
 ### Arquitetura Técnica
 
-- **Docker**: Ferramenta para containerização e gerenciamento de ambientes.
+- **Docker**: Ferramenta para conteinerização e gerenciamento de ambientes.
 - **Astro CLI**: Ferramenta de linha de comando para gerenciamento do Airflow.
 - **Airflow**: Plataforma para criar, agendar e monitorar workflows, utilizada para orquestração do pipeline de dados.
 - **Google Cloud Platform**: Utilizado para armazenamento e processamento dos dados.
