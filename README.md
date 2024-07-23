@@ -90,7 +90,7 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
 
 3. **Ingestão dos Arquivos**:
    - De início, os arquivos CAPAG.csv e cidades.csv foram carregados no Google Cloud Storage.
-      - Para isso, foram desenvolvidas as dags _upload_capag_to_gcs_ e _upload_capag_to_gcs_.
+      - Para isso, foram desenvolvidas as dags _upload_capag_to_gcs_ e _upload_cidades_to_gcs_.
    
    - Após esse procedimento, para receber os insumos no BigQuery, foi realizada a criação de datasets vazios (capag e cidades), através das dags _create_capag_dataset_ e _create_cidades_dataset_. 
    
