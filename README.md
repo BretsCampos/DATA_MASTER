@@ -271,6 +271,11 @@ O projeto busca transformar esses dados brutos em informações valiosas, atrav�
    - Com todo projeto executado com sucesso no Airflow, agora é possível criar gráficos no Metabase. 
 
    - Primeiramente abra o navegador de sua preferência e conecte no endereço http://localhost:3000/. Em seguida faça um cadastro no Metabase.
+   - Após o cadastro de e-mail e senha, deve-se conectar o BigQuery ao Metabase. Na mesma tela do cadastro inicial, é possível fazer essa conexão da seguinte maneira:
+
+      <img src="imagens/cadastro_metabase.png" width="700"/>
+
+   - Como visto na imagem acima, o "Tipo do banco de dados" deve ser BigQuery, e as informações de "Project ID" e "Service account JSON file" foram criadas nas configurações do Google Cloud nos itens **4.1** e **4.3** respectivamente.      
    - Os gráficos apresentados acima, no **item 3.6** deste arquivo, foram criados após a primeira execução das dags no Airflow. Com isso, deve-se criar os mesmos gráficos para uma reprodução do case em outra máquina.
    - Após o cadastro no Metabase, é possível iniciar a criação dos gráficos. Vá para a tela principal e clique em Novo > Pergunta:
 
